@@ -11,7 +11,5 @@ Example
 */
 
 function sortByLength(strs) {
-  return strs.sort(function (a, b) {
-    return a.length - b.length;
-  });
+  return strs.sort((a, b) => a.length - b.length);
 }
