@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function App() {
   const START_TIME = 5;
@@ -6,6 +6,8 @@ function App() {
   const [text, setText] = useState("");
   const [timeRemaining, setTimeRemaining] = useState(5);
   const [isTimeRunning, setIsTimeRunning] = useState(false);
+  const [wordCount, setWordCount] = useState(0);
+  const textBoxRef = useRef(null);
 
   function handleChange(e) {
     const { value } = e.target;
@@ -18,6 +20,8 @@ function App() {
       setIsTimeRunning(true);
       setTimeRemaining(START_TIME);
       setText("");
+      textBoxRef.current.disabled = false;
+      textBoxRef.current.focus();
     }
   }
 
@@ -45,6 +49,7 @@ function App() {
     <div>
       <h1>How fast do you type?</h1>
       <textarea
+        ref={textBoxRef}
         onChange={handleChange}
         value={text}
         disabled={!isTimeRunning}
@@ -53,7 +58,7 @@ function App() {
       <button onClick={startGame} disabled={isTimeRunning}>
         Start
       </button>
-      <h1>Word count: ???</h1>
+      <h1>Word count: {wordCount}</h1>
     </div>
   );
 }
